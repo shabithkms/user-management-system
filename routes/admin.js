@@ -10,7 +10,7 @@ var userHelper = require('../helpers/user-helper')
 // import emails from './user.js'
 const verifyAdminLogin = (req, res, next) => {
   if (req.session.adminloggedIn) {
-    next()
+    next() 
   } else {
     res.redirect('/admin/login')
   } 
@@ -75,35 +75,8 @@ router.get('/delete-user/:id',verifyAdminLogin,(req,res)=>{
   })
 })
 
-//Block User
-let blockedEmails=[]
-console.log("Blocked");
-console.log(blockedEmails); 
-router.get('/block-user/:id',verifyAdminLogin,(req,res)=>{
-  let userId=req.params.id 
-  userHelper.blockUser(userId).then((user)=>{
-    // blockedUsers.push(user)
-    // console.log("blockedUsers");
-    // console.log(blockedUsers);
-    console.log(user.email);
-    blockedEmails.push(user.email)
-    console.log("BlockedEmails");
-    console.log(blockedEmails);
-    res.redirect('/admin')
-  })
-})
- 
-//UnBlock USer
-router.get('/unblock-user/:id',verifyAdminLogin,(req,res)=>{
-  let userId=req.params.id 
-  userHelper.unBlockUser(userId).then(()=>{
-    // console.log(user.email);
-    // blockedEmails.push(user.email)
-    // console.log("BlockedEmails");
-    // console.log(blockedEmails);
-    res.redirect('/admin')
-  })
-})
+
+
 
 router.get('/edit-user/:id',verifyAdminLogin, async (req,res)=>{
   let userId=req.params.id

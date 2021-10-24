@@ -8,7 +8,14 @@ module.exports = {
     addUser: (userData, callback) => {
         return new Promise(async (resolve, reject) => {
             userData.pw = await bcrypt.hash(userData.pw, 10)
-            db.get().collection(collection.USER_COLLECTION).insertOne(userData).then(() => {
+            user = {
+                name: userData.name,
+                email: userData.email,
+                status: "true",
+                pw: userData.pw
+
+            }
+            db.get().collection(collection.USER_COLLECTION).insertOne(user).then(() => {
 
                 resolve()
             })
@@ -24,8 +31,15 @@ module.exports = {
     doSignup: (userData) => {
         return new Promise(async (resolve, reject) => {
             userData.pw = await bcrypt.hash(userData.pw, 10)
-            db.get().collection(collection.USER_COLLECTION).insertOne(userData).then((data) => {
-                resolve(userData)
+            user = {
+                name: userData.name,
+                email: userData.email,
+                status: "true",
+                pw: userData.pw
+
+            }
+            db.get().collection(collection.USER_COLLECTION).insertOne(user).then((data) => {
+                resolve(user)
             })
         })
     },
@@ -42,6 +56,8 @@ module.exports = {
                         response.user = user
                         response.status = true
                         resolve(response)
+                        console.log("Response");
+                        console.log(response);
                     } else {
                         console.log("Login Failed");
                         resolve({ status: false })
@@ -101,6 +117,7 @@ module.exports = {
                     $set: {
                         name: userData.name,
                         email: userData.email,
+                        status:userData.status,
                         pw: userData.pw
                     }
                 }).then((response) => {
