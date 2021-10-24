@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Bona+Nova:wght@400;700&display=swap");
+.session-title {
+  padding: 30px;
+  margin: 0px;
+  font-family: "Bona Nova", serif;
+}
+.session-title h2 {
+  width: 100%;
+  text-align: center;
+  font-size: 1.8rem;
+}
+.session-title p {
+  width: 100%;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.form-container {
+  background-color: rgb(242, 243, 234);
+  min-height: 100%;
+  position: absolute;
+  font-family: "Bona Nova", serif;
+}
+.form-container .form-card {
+  margin-top: 5%;
+  margin-bottom: 4%;
+  box-shadow: 0 2px 5px 1px rgba(64, 60, 67, 0.16);
+}
+.form-container .form-card .covero {
+  margin: 0px;
+}
+.form-container .form-card .covero .addresscol {
+  background-color: #ff0000cc;
+  padding: 0px;
+  color: #FFF;
+}
+.form-container .form-card .covero .addresscol .address-cover {
+  padding: 70px 50px;
+  margin: auto;
+}
+.form-container .form-card .covero .addresscol .address-cover h2 {
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+.form-container .form-card .covero .addresscol .address-cover p {
+  font-size: 0.95rem;
+  margin-bottom: 30px;
+}
+.form-container .form-card .covero .addresscol .address-cover address {
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+.form-container .form-card .covero .addresscol .address-cover ul {
+  padding-left: 0px;
+}
+.form-container .form-card .covero .addresscol .address-cover ul li {
+  list-style: none;
+  margin-bottom: 10px;
+}
+.form-container .form-card .covero .formcol {
+  background-color: #FFF;
+  padding: 70px 50px;
+}
+.form-container .form-card .covero .formcol .form-cover .form-row {
+  margin-bottom: 25px;
+}
+.form-container .form-card .covero .formcol .form-cover .form-row .form-control {
+  border-radius: 3px;
+  background-color: #cccccc29;
+  font-size: 0.9rem;
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,52 @@
+.logoimg{
+    padding: 2em;
+    height: 8em;
+    width: 20em;
+    border-radius: 3em;
+    margin-right: 23em; 
+
+}
+.section{
+    padding-top: 5em;
+    padding-bottom: 6em;
+    background-color: rgb(242, 243, 234);
+}
+#footer{
+    width: 100%;
+    background-color: #ff0000cc;
+    height: 5em;
+    text-align: center;
+    color: white;
+}
+.header{
+    background-color:#ff0000cc; 
+    width:100%;
+    height: 11em;
+}
+#form{
+    padding-top: 5em;
+}
+.input-group{
+    padding: 1em;
+}
+.gender{
+    padding-left: 2em;
+}
+.btn{
+    background-color:#ff0000cc ;
+    color: rgb(242, 243, 234);
+    margin-top: 3em;
+}
+.submit{
+    padding: 2em;
+}
+#login{
+    text-align: center;
+    color: white;
+}
+#h5{
+    padding-left: 13em;
+}
+.bride{
+    
+}

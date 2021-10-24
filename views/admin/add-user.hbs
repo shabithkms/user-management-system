@@ -1,0 +1,30 @@
+<div class="container" style="padding-top: 5em;">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <form action="/admin/add-user" method="post">
+                <legend>Add User</legend>
+
+                <div class="form-group">
+                    <label for="first_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Full Name" required>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="pw">Password</label>
+                    <input type="password" class="form-control" name="pw" id="pw" required>
+                </div>
+
+               
+
+                <center><button type="submit" class="btn btn-primary">Add</button></center>
+            </form>
+        </div>
+    </div>
+</div>

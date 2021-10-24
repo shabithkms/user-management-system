@@ -1,0 +1,24 @@
+
+.section{
+    padding-top: 5em;
+    padding-bottom: 6em;
+    background-color: rgb(242, 243, 234);
+}
+
+#form{
+    padding-top: 5em;
+}
+
+.btn{
+    background-color:#ff0000cc ;
+    color: rgb(242, 243, 234);
+    margin-top: 3em;
+}
+.submit{
+    padding: 2em;
+}
+.link{
+    padding-top: 1em;
+    text-align: center;
+    font-family: Helvetica Neue, sans-serif;
+}
