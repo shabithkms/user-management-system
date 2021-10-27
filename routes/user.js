@@ -3,6 +3,7 @@ var express = require('express');
 const { Db } = require('mongodb');
 const userHelper = require('../helpers/user-helper');
 var router = express.Router();
+var swal = require('sweetalert')
 var db = require('../config/connection')
 var collection = require('../config/collection')
 let emails = []
@@ -15,16 +16,32 @@ const verifyUserLogin = (req, res, next) => {
     let userId = req.session.user._id
     userHelper.getUserDetails(userId).then((user) => {
       console.log("In verify login");
-      console.log(user.status);
-      if (user.status === "true") {
-        next()
-      } else {
+      if (user) {
+        console.log(user.status);
+        if (user.status === "true") {
+          next()
+        } else {
 
-        req.session.blockErr = true
+          req.session.blockErr = true
+          req.session.user = null
+          req.session.userloggedIn = false
+          res.redirect('/login')
+        }
+
+      } else {
+        console.log('no user');
+        req.session.deleteErr = true
         req.session.user = null
         req.session.userloggedIn = false
         res.redirect('/login')
+        swal({
+          title: "Good job!",
+          text: "You clicked the button!",
+          icon: "success",
+          button: "Aww yiss!",
+        });
       }
+
     })
   } else {
     res.redirect('/login')
@@ -32,17 +49,20 @@ const verifyUserLogin = (req, res, next) => {
 }
 
 /* GET home page. */
-router.get('/', function (req, res,) {
-  let user = req.session.user
+router.get('/', verifyUserLogin, function (req, res,) {
+  // let user = req.session.user
+
   res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
   if (req.session.userloggedIn) {
-    res.render('user/view-profile', { loginPage: false, user });
-  }
-  else {
+    let userId = req.session.user._id
+    userHelper.getUserDetails(userId).then((user) => {
+      res.render('user/view-profile', { loginPage: false, user });
+    })
+
+  } else {
     res.redirect('/login')
 
   }
-
 });
 router.get('/login', function (req, res, next) {
 
@@ -50,10 +70,16 @@ router.get('/login', function (req, res, next) {
   if (req.session.userloggedIn) {
     res.redirect('/')
   } else {
-
-    res.render('user/user-login', { loginPage: true, signup: false, "loginErr": req.session.loggedInErr, "blockErr": req.session.blockErr });
-    req.session.blockErr = false
-    req.session.loggedInErr = false
+    // if (req.session.deleteErr) {
+      
+      
+    //   res.render('user/user-login',{loginPage: true, signup: false})
+      
+    // } else {
+      res.render('user/user-login', { loginPage: true, signup: false, "loginErr": req.session.loggedInErr, "blockErr": req.session.blockErr });
+      req.session.blockErr = false
+      req.session.loggedInErr = false
+    // }
   }
 });
 
@@ -76,8 +102,6 @@ router.post('/login', (req, res,) => {
 
         res.redirect('/login')
       }
-
-
     } else {
       req.session.loggedInErr = true
       res.redirect('/login')
@@ -91,8 +115,6 @@ router.get('/signup', function (req, res, next) {
   } else {
     res.render('user/user-signup', { loginPage: true, signup: true });
   }
-
-
 });
 
 router.post('/signup', (req, res) => {
@@ -106,20 +128,18 @@ router.post('/signup', (req, res) => {
 
 router.get('/edit-user/:id', verifyUserLogin, async (req, res) => {
   let userId = req.params.id
+  
   let user = await userHelper.getUserDetails(userId)
 
   res.render('user/edit-user', { adminPage: false, user })
-
 })
 router.post('/edit-user/:id', verifyUserLogin, async (req, res) => {
   let userId = req.params.id
-  userHelper.updateUser(userId, req.body).then(async (response) => {
+  userHelper.editUser(userId, req.body).then(async (response) => {
     let user = await userHelper.getUserDetails(userId)
     req.session.userloggedIn = false
-
     res.redirect('/login')
   })
-
 })
 
 router.get('/logout', (req, res) => {
@@ -127,8 +147,6 @@ router.get('/logout', (req, res) => {
   req.session.userloggedIn = false
   res.redirect('/login')
 })
-
-
 
 
 module.exports = router;

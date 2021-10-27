@@ -42,7 +42,10 @@
                     <h6 class="font pb-3" style="color: red;">invalid email or password</h6>
                     {{/if}}
                     {{#if blockErr}}
-                    <h6 class="font pb-3" style="color: red;">This User was Blocked By admin</h6>
+                    <h6 class="font pb-3" style="color: red;">You are Blocked By admin</h6>
+                    {{/if}}
+                    {{#if deleteErr}}
+                    <h6 class="font pb-3" style="color: red;">Your Account deleted By admin</h6>
                     {{/if}}
                     <br>
                     <input type="submit" class="login100-form-btn" value="Login" name="login"><br>
@@ -51,7 +54,7 @@
                     {{else}}
                     <a href="/signup" class="pt-3   " style="text-decoration: none;">Create New account?</a>
                    
-                    {{/if}}
+                    {{/if}} 
 
                 </div>
 

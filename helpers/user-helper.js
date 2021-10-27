@@ -7,12 +7,12 @@ module.exports = {
 
     addUser: (userData, callback) => {
         return new Promise(async (resolve, reject) => {
-            userData.pw = await bcrypt.hash(userData.pw, 10)
+            newpw = await bcrypt.hash(userData.email, 10)
             user = {
                 name: userData.name,
                 email: userData.email,
-                status: "true",
-                pw: userData.pw
+                status:"true",
+                pw: newpw
 
             }
             db.get().collection(collection.USER_COLLECTION).insertOne(user).then(() => {
@@ -110,6 +110,23 @@ module.exports = {
         })
     },
     updateUser: (userId, userData) => {
+        return new Promise(async (resolve, reject) => {
+            // userData.pw = await bcrypt.hash(userData.pw, 10)
+            db.get().collection(collection.USER_COLLECTION)
+                .updateOne({ _id: objectId(userId) }, {
+                    $set: {
+                        name: userData.name,
+                        email: userData.email,
+                        status:userData.status
+                    }
+                }).then((response) => {
+                    resolve(response)
+                    console.log("Response helper");
+                    console.log(response);
+                })
+        })
+    },
+    editUser: (userId, userData) => {
         return new Promise(async (resolve, reject) => {
             userData.pw = await bcrypt.hash(userData.pw, 10)
             db.get().collection(collection.USER_COLLECTION)
