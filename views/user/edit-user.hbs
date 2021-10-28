@@ -1,44 +1,75 @@
 <div class="container" style="padding-top: 5em;">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            <form action="/edit-user/{{user._id}}" method="post">
+            <form action="/edit-user/{{user._id}}" id="" method="post">
                 <legend>Edit My details</legend>
 
                 <div class="form-group">
                     <label for="first_name">Name</label>
-                    <input type="text" class="form-control" value="{{user.name}}" name="name" id="name" placeholder="Full Name">
+                    <input type="text" class="form-control" value="{{user.name}}" name="name" id="name"
+                        placeholder="Full Name">
                 </div>
 
 
 
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" class="form-control" value="{{user.email}}" name="email" id="email" placeholder="Email Address">
+                    <input type="email" class="form-control" value="{{user.email}}" name="email" id="email"
+                        placeholder="Email Address">
+                </div>
+                
+
+                <div class="form-group">
+                    <label for="pw">Password</label>
+                    <input type="password" class="form-control" name="pw" id="pw" required>
                 </div>
                 <div class="form-group" style="display: none;">
                     <label for="status">User Status </label>
-                    <select name="status" class="form-control"  id="">
+                    <select name="status" class="form-control" id="">
                         <option value="{{user.status}}">{{user.status}}</option>
                         <option value="true">True</option>
                         <option value="false">False</option>
+
                         
-                        {{!-- {{#if (status)}}
-                        <option value="blocked">blocked</option>
-                        {{else}}
-                        <option value="active">active</option>
-                        {{/if}} --}}
 
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label for="pw">Password</label>
-                    <input type="password" class="form-control"   name="pw" id="pw" required>
+
+                <!-- Button trigger modal -->
+                <center> <button type="button" class="btn btn-primary " style="width: fit-content;" data-toggle="modal"
+                        data-target="#exampleModalCenter">
+                        Save Changes
+                    </button></center>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Do you want to save the changes?
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {{!-- <div class="modal-body">
+
+                            </div> --}}
+                            <div class="modal-footer">
+                                <a href="/edit-user/{{user._id}}">
+                                    <button type="button" class="btn btn-warning" style="width: 80px;">Cancel</button>
+                                </a>
+                                {{!-- <a href="/admin/delete-user/{{this._id}}"> --}}
+                                    <button type="submit" class="btn btn-danger" style="width: 80px;">Yes</button>
+                                    {{!-- </a> --}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-               
-
-                <center><button type="submit" class="btn btn-primary">Update</button></center>
+                {{!-- End --}}
+                {{!-- <center><button type="submit" class="btn btn-primary">Update</button></center> --}}
             </form>
         </div>
     </div>

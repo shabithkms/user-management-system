@@ -20,20 +20,54 @@
           <td></td>
           <td>{{this.name}}</td>
           <td>{{this.email}}</td>
-          {{!-- {{#if this.status }} --}}
-          <td class="text">{{this.status}}</td>
-          {{!-- {{else}}
-          <td class="text-danger">{{this.status}}</td>
-          {{/if}} --}}
-          
 
-          {{!-- <td>{{this.pw}}</td> --}}
+          <td>{{this.status}}</td>
+
+
+
+
           <td>
             <div class="d-flex">
               <a href="/admin/edit-user/{{this._id}}" class="btn btn-primary adminButtons" style="width: 80px;">Edit</a>
 
-              <a href="/admin/delete-user/{{this._id}}" id="updateUser"  class="btn btn-danger ml-2 adminButtons"
-               onclick="return confirm('Are you want to delete {{this.name}}?')" style="width: 80px;" >Delete</a>
+              {{!-- <a href="/admin/delete-user/{{this._id}}" id="updateUser" class="btn btn-danger ml-2 adminButtons"
+                onclick="return confirm('Are you want to delete {{this.name}}?')" style="width: 80px;">Delete</a> --}}
+              {{!-- <a href="/admin/delete-user/{{this._id}}" class="btn btn-danger ml-2 adminButtons"
+                onclick=" deleteUser('{{this._id}}')" style="width: 80px;">Delete</a> --}}
+
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-danger adminButtons" data-toggle="modal"
+                data-target="#exampleModalCenter">
+                Delete
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Do you want to delete {{this.name}}?</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>
+                        <h6>Once deleted, you will not be able to recover this User!</h6>
+                      </p>
+                    </div>
+                    <div class="modal-footer">
+                      <a href="/admin">
+                        <button type="button" class="btn btn-warning">Cancel</button>
+                      </a>
+                      <a href="/admin/delete-user/{{this._id}}">
+                        <button type="button" class="btn btn-danger">Delete</button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
 
             </div>

@@ -47,6 +47,9 @@
                     {{#if deleteErr}}
                     <h6 class="font pb-3" style="color: red;">Your Account deleted By admin</h6>
                     {{/if}}
+                    {{#if edited}}
+                    <h6 class="font pb-3" style="">Please login again </h6>
+                    {{/if}}
                     <br>
                     <input type="submit" class="login100-form-btn" value="Login" name="login"><br>
                     {{#if signup}}

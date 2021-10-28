@@ -20,17 +20,26 @@
 
 
       </ul>
-      <div class="dropdown show">
-        <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+      <div class="dropdown pmd-dropdown">
+        <button class="btn btn-sm pmd-ripple-effect btn-danger dropdown-toggle" type="button"
+          id="dropdownMenuBottomRight" data-toggle="dropdown" aria-expanded="true">
+          {{#if admin}}
+          {{admin.name}}
+          {{else}}
+          Admin
+          {{/if}}
+          </button>
+
+        {{!-- <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           {{#if admin}}
           {{admin.name}}
           {{else}}
           Admin
           {{/if}}
-        </a>
+        </a> --}}
 
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <div class="dropdown-menu dropdown-menu-right">
           {{#if admin}}
           <a class="dropdown-item" href="/admin/logout">Logout</a>
           {{else}}

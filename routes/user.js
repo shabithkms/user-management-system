@@ -69,8 +69,9 @@ router.get('/login', function (req, res, next) {
 
     res.render('user/user-login', {
       loginPage: true, signup: false, "loginErr": req.session.loggedInErr,
-      "blockErr": req.session.blockErr, "deleteErr": req.session.deleteErr
+      "blockErr": req.session.blockErr, "deleteErr": req.session.deleteErr,"edited":req.session.edited
     });
+    req.session.edited=false
     req.session.blockErr = false
     req.session.loggedInErr = false
 
@@ -135,8 +136,10 @@ router.post('/edit-user/:id', verifyUserLogin, async (req, res) => {
   let userId = req.params.id
   userHelper.editUser(userId, req.body).then(async (response) => {
     let user = await userHelper.getUserDetails(userId)
+    req.session.edited=true
     req.session.userloggedIn = false
     res.redirect('/login')
+    // res.redirect('/')
   })
 })
 

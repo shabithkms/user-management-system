@@ -2,8 +2,13 @@
   width: 100% !important;
 } */
 .adminButtons{
-  border-radius: 30px;
+  border-radius: 20px;
+  width: 80px;
+  margin-left: .4em;
 }
 .dataTables_paginate a{
   padding: 10px;
+}
+.table-bordered{
+  width: max-content;
 }

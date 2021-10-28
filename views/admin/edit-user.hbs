@@ -17,20 +17,16 @@
                     <input type="email" class="form-control" value="{{user.email}}" name="email" id="email"
                         placeholder="Email Address" required>
                 </div>
-                {{!-- <div class="form-group">
-                    <label for="status">User Status </label>
-                    <input type="text" class="form-control" value="{{user.status}}" name="status" id="status">
-                </div> --}}
+                
                 <div class="form-group">
                     <label for="status">User Status </label>
                     <select name="status" class="form-control" id="">
                         <option value="{{user.status}}">{{user.status}}</option>
-                        {{!-- <option value="true">True</option>
-                        <option value="false">False</option> --}}
+                        
 
                         {{#if status}}
                         <option value="Blocked">Blocked</option>
-                        {{else}}    
+                        {{else}}
                         <option value="Active">Active</option>
                         {{/if}}
 
@@ -43,8 +39,42 @@
                 </div> --}}
 
 
+                <!-- Button trigger modal -->
+                <center> <button type="button" class="btn btn-danger " style="width: fit-content;" data-toggle="modal"
+                        data-target="#exampleModalCenter">
+                        Save Changes
+                    </button></center>
 
-                <center><button  id="updateUser" onclick="return confirm('Are you want to edit {{this.name}}'s deails?')" class="btn btn-primary">Update</button></center>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Do you want to update {{user.name}}'s details?
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {{!-- <div class="modal-body">
+
+                            </div> --}}
+                            <div class="modal-footer">
+                                <a href="/admin/edit-user/{{user._id}}">
+                                    <button type="button" class="btn btn-warning" style="width: 80px;">Cancel</button>
+                                </a>
+                                {{!-- <a href="/admin/delete-user/{{this._id}}"> --}}
+                                    <button type="submit" class="btn btn-danger" style="width: 80px;">Yes</button>
+                                {{!-- </a> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{!-- End --}}
+                {{!-- <center><button id="updateUser"
+                        onclick="return confirm('Are you want to edit {{this.name}}'s deails?')"
+                        class="btn btn-primary">Update</button></center> --}}
             </form>
         </div>
     </div>

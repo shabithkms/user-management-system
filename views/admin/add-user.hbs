@@ -13,7 +13,8 @@
 
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" required>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Email Address"
+                        required>
                 </div>
 
                 {{!-- <div class="form-group">
@@ -21,11 +22,45 @@
                     <input type="password" class="form-control" name="pw" id="pw" required>
                 </div> --}}
 
-               {{#if emailErr}}
+                {{#if emailErr}}
                 <h6 class="font pb-3" style="color: red;">This email is already taken</h6>
                 {{/if}}
 
-                <center><button type="submit" class="btn btn-primary">Add</button></center>
+                <!-- Button trigger modal -->
+                <center> <button type="button" class="btn btn-danger " style="width: fit-content;" data-toggle="modal"
+                        data-target="#exampleModalCenter">
+                        ADD
+                    </button></center>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Do you want to add this user?
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {{!-- <div class="modal-body">
+
+                            </div> --}}
+                            <div class="modal-footer">
+                                <a href="/admin/add-user/{{user._id}}">
+                                    <button type="button" class="btn btn-warning" style="width: 80px;">Cancel</button>
+                                </a>
+                                {{!-- <a href="/admin/delete-user/{{this._id}}"> --}}
+                                    <button type="submit" class="btn btn-danger" style="width: 80px;">Add</button>
+                                    {{!-- </a> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{!-- End --}}
+
+                {{!-- <center><button type="submit" class="btn btn-primary">Add</button></center> --}}
             </form>
         </div>
     </div>
