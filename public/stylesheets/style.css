@@ -1,8 +1,9 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/* #userTable{
+  width: 100% !important;
+} */
+.adminButtons{
+  border-radius: 30px;
 }
-
-a {
-  color: #00B7FF;
+.dataTables_paginate a{
+  padding: 10px;
 }

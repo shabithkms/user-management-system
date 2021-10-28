@@ -1,6 +1,6 @@
 <section class="" style="padding-top: 5em; d-flex">
   <div class="container col-md-12 col-lg-12 d-flex justify-content-center">
-    <table class="table" style="width: fit-content;" id="userTable">
+    <table class="table table-striped table-bordered " cellspacing="0" id="userTable">
       <thead>
         <tr>
           {{!-- <th scope="col">#</th> --}}
@@ -16,23 +16,29 @@
       <tbody>
         {{#each users}}
         <tr>
-          
+
           <td></td>
           <td>{{this.name}}</td>
           <td>{{this.email}}</td>
-          <td>{{this.status}}</td>
+          {{!-- {{#if this.status }} --}}
+          <td class="text">{{this.status}}</td>
+          {{!-- {{else}}
+          <td class="text-danger">{{this.status}}</td>
+          {{/if}} --}}
+          
+
           {{!-- <td>{{this.pw}}</td> --}}
           <td>
             <div class="d-flex">
-              <a href="/admin/edit-user/{{this._id}}" class="btn btn-primary " style="width: 80px;">Edit</a>
+              <a href="/admin/edit-user/{{this._id}}" class="btn btn-primary adminButtons" style="width: 80px;">Edit</a>
 
-              <a href="/admin/delete-user/{{this._id}}" id="delete" class="btn btn-danger ml-2"
-                onclick="return confirm('Are you want to delete {{this.name}}?')" style="width: 80px;">Delete</a>
+              <a href="/admin/delete-user/{{this._id}}" id="updateUser"  class="btn btn-danger ml-2 adminButtons"
+               onclick="return confirm('Are you want to delete {{this.name}}?')" style="width: 80px;" >Delete</a>
 
 
             </div>
 
-            
+
           </td>
 
         </tr>

@@ -21,7 +21,9 @@
                     <input type="password" class="form-control" name="pw" id="pw" required>
                 </div> --}}
 
-               
+               {{#if emailErr}}
+                <h6 class="font pb-3" style="color: red;">This email is already taken</h6>
+                {{/if}}
 
                 <center><button type="submit" class="btn btn-primary">Add</button></center>
             </form>

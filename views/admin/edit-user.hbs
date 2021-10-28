@@ -1,48 +1,50 @@
 <div class="container" style="padding-top: 5em;">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            <form action="/admin/edit-user/{{user._id}}" method="post">
+            <form action="/admin/edit-user/{{user._id}}" id="editAdmin" method="post">
                 <legend>Edit User details</legend>
 
                 <div class="form-group">
                     <label for="first_name">Name</label>
-                    <input type="text" class="form-control" value="{{user.name}}" name="name" id="name" placeholder="Full Name">
+                    <input type="text" class="form-control" value="{{user.name}}" name="name" id="name"
+                        placeholder="Full Name" required minlength="4" maxlength="20">
                 </div>
 
 
 
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" class="form-control" value="{{user.email}}" name="email" id="email" placeholder="Email Address">
+                    <input type="email" class="form-control" value="{{user.email}}" name="email" id="email"
+                        placeholder="Email Address" required>
                 </div>
-                 {{!-- <div class="form-group">
+                {{!-- <div class="form-group">
                     <label for="status">User Status </label>
-                    <input type="text" class="form-control" value="{{user.status}}" name="status" id="status" >
+                    <input type="text" class="form-control" value="{{user.status}}" name="status" id="status">
                 </div> --}}
                 <div class="form-group">
                     <label for="status">User Status </label>
-                    <select name="status" class="form-control"  id="">
-                        {{!-- <option value="{{user.status}}">{{user.status}}</option> --}}
-                        <option value="true">True</option>
-                        <option value="false">False</option>
-                        
-                        {{!-- {{#if (status)}}
-                        <option value="blocked">blocked</option>
-                        {{else}}
-                        <option value="active">active</option>
-                        {{/if}} --}}
+                    <select name="status" class="form-control" id="">
+                        <option value="{{user.status}}">{{user.status}}</option>
+                        {{!-- <option value="true">True</option>
+                        <option value="false">False</option> --}}
+
+                        {{#if status}}
+                        <option value="Blocked">Blocked</option>
+                        {{else}}    
+                        <option value="Active">Active</option>
+                        {{/if}}
 
                     </select>
                 </div>
 
                 {{!-- <div class="form-group">
                     <label for="pw">Password</label>
-                    <input type="password" class="form-control"   name="pw" id="pw" required>
+                    <input type="password" class="form-control" name="pw" id="pw" required>
                 </div> --}}
 
-               
 
-                <center><button type="submit" class="btn btn-primary">Update</button></center>
+
+                <center><button  id="updateUser" onclick="return confirm('Are you want to edit {{this.name}}'s deails?')" class="btn btn-primary">Update</button></center>
             </form>
         </div>
     </div>

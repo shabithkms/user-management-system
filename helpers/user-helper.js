@@ -11,13 +11,16 @@ module.exports = {
             user = {
                 name: userData.name,
                 email: userData.email,
-                status:"true",
+                status:"Active",
                 pw: newpw
 
             }
             db.get().collection(collection.USER_COLLECTION).insertOne(user).then(() => {
-
+                
                 resolve()
+            }).catch((err)=>{
+                
+                reject(err)
             })
         })
     },
@@ -34,12 +37,15 @@ module.exports = {
             user = {
                 name: userData.name,
                 email: userData.email,
-                status: "true",
+                status: "Active",
                 pw: userData.pw
 
             }
             db.get().collection(collection.USER_COLLECTION).insertOne(user).then((data) => {
                 resolve(user)
+            }).catch((err)=>{
+                
+                reject(err)
             })
         })
     },

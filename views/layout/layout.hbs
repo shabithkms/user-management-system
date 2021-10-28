@@ -10,11 +10,11 @@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+  <link rel='stylesheet' href='/stylesheets/style.css' />
   <title>User Management System</title>
   {{#if loginPage}}
   <title>User Login</title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+
   <style>
     body,
     html {
@@ -95,22 +95,6 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
   <script src="/bootstrap/js/popper.js"></script>
   <script src="/bootstrap/js/bootstrap.min.js"></script>
-
-  {{!--
-  <script>
-    $(document).ready(function () {
-      $('#signup-form').validate({
-        rules: {
-          'name': {
-            required: true,
-            minlength: 4
-                    maxlength: 20
-          }
-        }
-
-      })
-    })
-  </script> --}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
@@ -119,6 +103,7 @@
     crossorigin="anonymous"></script>
   <script type="text/javascript" charset="utf8"
     src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
   <script>
     $(document).ready(function () {
       $('#userTable').DataTable();
@@ -127,23 +112,48 @@
       $(this).children("td:eq(0)").html(idx + 1);
     });
   </script>
-  {{!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
-  {{!-- <script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script type="text/javascript" src="js/script.js"></script>
+  {{!--
+  <script>
+    function deleteUser(id) {
+      console.log("in delete user");
+      console.log(id)
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+        .then((willDelete) => {
+          if (willDelete) {
+            $.ajax({
+              url: "/admin/delete-user",
+              method: "POST",
+              data: { id: id },
+              success: (result) => {
+                if (result.status) {
+                  swal("user deleted!", {
+                    icon: "success",
+                  });
+                  location.href = "/admin"
 
-    //import JQuery from script
-    //import swal script
 
-    $("#delete").on("submit", function (e) {
-      e.preventDefault();
+                }
+              }
 
-      $.ajax({
-        url: "/admin/delete-user/:id",
-        method: "get"
-      }).done(d => {
-        swal(e.responseJSON);
-      });
-    })
+            })
+          }
+
+        })
+
+
+    }
   </script> --}}
+
+
+
 </body>
 
 </html>

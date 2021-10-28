@@ -18,11 +18,12 @@ const verifyUserLogin = (req, res, next) => {
       console.log("In verify login");
       if (user) {
         console.log(user.status);
-        if (user.status === "true") {
+        if (user.status === "Active") {
           next()
         } else {
 
           req.session.blockErr = true
+          req.session.deleteErr = false
           req.session.user = null
           req.session.userloggedIn = false
           res.redirect('/login')
@@ -34,12 +35,7 @@ const verifyUserLogin = (req, res, next) => {
         req.session.user = null
         req.session.userloggedIn = false
         res.redirect('/login')
-        swal({
-          title: "Good job!",
-          text: "You clicked the button!",
-          icon: "success",
-          button: "Aww yiss!",
-        });
+
       }
 
     })
@@ -56,7 +52,7 @@ router.get('/', verifyUserLogin, function (req, res,) {
   if (req.session.userloggedIn) {
     let userId = req.session.user._id
     userHelper.getUserDetails(userId).then((user) => {
-      res.render('user/view-profile', { loginPage: false, user });
+      res.render('user/view-profile', { loginPage: false, user ,});
     })
 
   } else {
@@ -70,16 +66,14 @@ router.get('/login', function (req, res, next) {
   if (req.session.userloggedIn) {
     res.redirect('/')
   } else {
-    // if (req.session.deleteErr) {
-      
-      
-    //   res.render('user/user-login',{loginPage: true, signup: false})
-      
-    // } else {
-      res.render('user/user-login', { loginPage: true, signup: false, "loginErr": req.session.loggedInErr, "blockErr": req.session.blockErr });
-      req.session.blockErr = false
-      req.session.loggedInErr = false
-    // }
+
+    res.render('user/user-login', {
+      loginPage: true, signup: false, "loginErr": req.session.loggedInErr,
+      "blockErr": req.session.blockErr, "deleteErr": req.session.deleteErr
+    });
+    req.session.blockErr = false
+    req.session.loggedInErr = false
+
   }
 });
 
@@ -90,7 +84,7 @@ router.post('/login', (req, res,) => {
       let status = response.user.status
       console.log("Status");
       console.log(status);
-      if (status === "true") {
+      if (status === "Active") {
         req.session.user = response.user
         req.session.userloggedIn = true
         res.redirect('/')
@@ -113,7 +107,8 @@ router.get('/signup', function (req, res, next) {
   if (req.session.userloggedIn) {
     res.redirect('/')
   } else {
-    res.render('user/user-signup', { loginPage: true, signup: true });
+    res.render('user/user-signup', { loginPage: true, signup: true,"emailErr":req.session.emailErr });
+    req.session.emailErr=false
   }
 });
 
@@ -123,12 +118,15 @@ router.post('/signup', (req, res) => {
     req.session.user = response
     req.session.userloggedIn = true
     res.redirect('/login')
+  }).catch((err)=>{
+    req.session.emailErr=true
+    res.redirect('/signup')
   })
 })
 
 router.get('/edit-user/:id', verifyUserLogin, async (req, res) => {
   let userId = req.params.id
-  
+
   let user = await userHelper.getUserDetails(userId)
 
   res.render('user/edit-user', { adminPage: false, user })

@@ -2,14 +2,9 @@ const { response } = require('express');
 var express = require('express');
 const { default: swal } = require('sweetalert');
 var router = express.Router();
-// var swal =require('sweetalert')
 var userHelper = require('../helpers/user-helper')
-// var userJS=require('./user')
 
-// let emails=userJS.emails
-// console.log("In admin js");
-// console.log(emails);
-// import emails from './user.js'
+
 const verifyAdminLogin = (req, res, next) => {
   if (req.session.adminloggedIn) {
     next()
@@ -23,10 +18,14 @@ router.get('/', function (req, res, next) {
   let admin = req.session.admin
   res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
   if (req.session.adminloggedIn) {
+
     userHelper.getAllUser().then((users) => {
-      // userHelper.getBlockedUsers().then((blockedUsers)=>{
-      res.render('admin/view-users', { adminPage: true, admin, users })
-      // })
+      
+      let userStatus = "Active"
+    
+
+      res.render('admin/view-users', { adminPage: true, admin, users,userStatus })
+
 
     })
   }
@@ -60,19 +59,22 @@ router.post('/login', (req, res,) => {
 })
 
 router.get('/add-user', verifyAdminLogin, (req, res) => {
-  res.render('admin/add-user', { adminPage: true })
+  res.render('admin/add-user', { adminPage: true,"emailErr":req.session.emailErr })
+  req.session.emailErr=false
 })
 
 router.post('/add-user', (req, res) => {
   userHelper.addUser(req.body).then(() => {
 
     res.redirect('/admin')
+  }).catch((err)=>{
+    console.log("Email already taken");
+    req.session.emailErr=true
+   res.redirect('/admin/add-user')
   })
 })
 
 router.get('/delete-user/:id', verifyAdminLogin, (req, res) => {
-  // swal('Hello world!');
-  // res.json("Hello world!")
   let userId = req.params.id
   userHelper.deleteUser(userId).then((response) => {
     res.redirect('/admin')
@@ -86,9 +88,15 @@ router.get('/edit-user/:id', verifyAdminLogin, async (req, res) => {
   let userId = req.params.id
   let user = await userHelper.getUserDetails(userId)
   console.log(user);
-  res.render('admin/edit-user', { adminPage: true, user })
+  let status = true
+  if (user.status !== "Active")
+    status = false
+  console.log("in edit user");
+  console.log(status);
+  res.render('admin/edit-user', { adminPage: true, user, status })
 
 })
+
 router.post('/edit-user/:id', verifyAdminLogin, async (req, res) => {
   let userId = req.params.id
   userHelper.updateUser(userId, req.body).then((response) => {

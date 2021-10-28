@@ -28,7 +28,11 @@
                 <div class="form-group">
                     <label for="pw">Password</label>
                     <input type="password" class="form-control" name="pw" placeholder="Password" minlength="6" id="pw" required>
+
                 </div>
+                {{#if emailErr}}
+                <h6 class="font pb-3" style="color: red;">This email is already taken</h6>
+                {{/if}}
 
 
 
